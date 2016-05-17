@@ -114,4 +114,9 @@ public class Employee {
         this.modifiedDate = modifiedDate;
     }
 
+    @Override
+    public String toString() {
+        return "Employee{" + "id=" + id + ", departmentId=" + departmentId + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", address=" + address + ", status=" + status + ", joinedDate=" + joinedDate + ", effectiveDate=" + effectiveDate + ", modifiedDate=" + modifiedDate + '}';
+    }
+    
 }

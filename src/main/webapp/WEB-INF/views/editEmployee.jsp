@@ -15,11 +15,11 @@
     </head>
     <body>
 
-        <div class="container"><!--
+        <div class="container">
             <h1>Edit Employee</h1>
-            <c:url var="employeeEdit" value="updateEmployee?id=${employee.id}" />
-            -->            <form id="updateCourse" modelAttribute="employee" method="POST" class="form-group" action="${employeeEdit}">
-                <table width="400px" height="150px" class="table table-bordered">  
+            <c:url var="employeeEdit" value="updateEmployee" />
+                     <form id="updateCourse" modelAttribute="employee" method="POST" class="form-group" action="${employeeEdit}">
+                <table width="400px" height="150px" class="table table-bordered table-striped">  
                     <tr>  
                         <td><label path="firstName">First Name</label></td>  
                         <td><input path="firstName" value="${employee.firstName}" /></td>  
@@ -51,6 +51,9 @@
                         <td><input path="status" value="${employee.status}"/></td>  
                     </tr> 
                     <tr>
+                    <input type="hidden" value="${employee.id}"/>
+                    </tr>
+                    <tr>
                         <td>
                             <label path="checkbox">Notify department change in email</label>
                             <input path="checkbox"type="checkbox" id="MailSendCheckbox"/>
@@ -67,7 +70,8 @@
         
        <div class="container" id="mail" height="200px">
             <h1>Email Form</h1>
-            <form method="POST" action="/mail/send" class="form-group">
+            <c:url var="sendMail" value="mail/send" />
+            <form method="POST" action="${sendMail}" class="form-group">
                 <table>
                     <tr>
                         <td>  <label path="email">Email to:</label></td>

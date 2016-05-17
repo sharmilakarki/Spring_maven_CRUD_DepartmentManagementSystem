@@ -51,8 +51,8 @@ public class EmployeeController {
 
     }
 
-    @RequestMapping("saveEmployee")
-    public ModelAndView registerUser(@ModelAttribute("employee") Employee employee) throws ClassNotFoundException, SQLException {
+    @RequestMapping("/saveEmployee")
+    public ModelAndView registerUser(@ModelAttribute("employee") Employee employee,BindingResult result) throws ClassNotFoundException, SQLException {
         employeeDao.insert(employee);
         System.out.println(employee.toString());
         return new ModelAndView("redirect:EmployeePage");
@@ -74,9 +74,11 @@ public class EmployeeController {
         employee = employeeDao.getById(id);
         return new ModelAndView("editEmployee", "employee", employee);
     }
-    @RequestMapping("/updateEmployee?id=${id}")
-    public ModelAndView saveEditedEmployee(@RequestParam int id, @ModelAttribute("employee") Employee employee ,BindingResult result) throws ClassNotFoundException, SQLException {
+    @RequestMapping("/updateEmployee")
+    public ModelAndView saveEditedEmployee(@ModelAttribute("employee") Employee employee ,BindingResult result) throws ClassNotFoundException, SQLException {
+        
         employeeDao.update(employee);
+        System.out.println(employee.toString());
         return new ModelAndView("redirect:EmployeePage");
     }
      @RequestMapping("delete")
