@@ -5,10 +5,16 @@
  */
 package com.abcd.employeemaven.controller;
 
-
-import com.abcd.employeemaven.dao.EmployeeDao;
+import com.abcd.employeemaven.entity.Department;
 import com.abcd.employeemaven.entity.Employee;
+import com.abcd.employeemaven.service.DepartmentService;
+import com.abcd.employeemaven.service.EmployeeService;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,31 +35,42 @@ import org.springframework.web.servlet.ModelAndView;
 public class EmployeeController {
 
     @Autowired
-    private EmployeeDao employeeDao;
-    
+    private EmployeeService employeeService;
+
+    private DepartmentService departmentService;
+
 //    @Autowired
 //    private JavaMailSender javaMailSender;
-   
-    @RequestMapping( method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public String index() {
         return "index";
     }
 
-    
     @RequestMapping(value = "/EmployeePage", method = RequestMethod.GET)
 
-    public String index(ModelMap mv) throws ClassNotFoundException, SQLException {
+    public ModelAndView viewEmployees(ModelMap map, HttpServletRequest request) throws ClassNotFoundException, SQLException {
 
-       
-        mv.addAttribute("employee", employeeDao.getAll());
-        
-        return "EmployeePage";
+        List<Employee> employeeList = new ArrayList<>();
+        employeeList = employeeService.getAll();
+        List<Department> departmentList = new ArrayList<Department>();
+        //departmentList=departmentService.getAll();
+
+        for (Employee e : employeeList) {
+            System.out.println(e);
+        }
+      //  map.addAttribute("employee", employeeList);
+        //map.addAttribute("employee", employeeService.getByDepartmentId(departmentId));
+        Map<String,Object> model=new HashMap<String, Object>();
+        model.put("employee", employeeList);
+//        model.put("department", departmentList);
+        //return "EmployeePage";
+        return new ModelAndView("EmployeePage", "model",model);
 
     }
 
     @RequestMapping("/saveEmployee")
-    public ModelAndView registerUser(@ModelAttribute("employee") Employee employee,BindingResult result) throws ClassNotFoundException, SQLException {
-        employeeDao.insert(employee);
+    public ModelAndView registerUser(@ModelAttribute("employee") Employee employee, BindingResult result) throws ClassNotFoundException, SQLException {
+        employeeService.insert(employee);
         System.out.println(employee.toString());
         return new ModelAndView("redirect:EmployeePage");
     }
@@ -70,20 +87,22 @@ public class EmployeeController {
     }
 
     @RequestMapping("edit")
-    public ModelAndView editEmployee(@RequestParam int id, @ModelAttribute("employee") Employee employee ,BindingResult result) throws ClassNotFoundException, SQLException {
-        employee = employeeDao.getById(id);
+    public ModelAndView editEmployee(@RequestParam int id, @ModelAttribute("employee") Employee employee, BindingResult result) throws ClassNotFoundException, SQLException {
+        employee = employeeService.getById(id);
         return new ModelAndView("editEmployee", "employee", employee);
     }
+
     @RequestMapping("/updateEmployee")
-    public ModelAndView saveEditedEmployee(@ModelAttribute("employee") Employee employee ,BindingResult result) throws ClassNotFoundException, SQLException {
-        
-        employeeDao.update(employee);
+    public ModelAndView saveEditedEmployee(@ModelAttribute("employee") Employee employee, BindingResult result) throws ClassNotFoundException, SQLException {
+
+        employeeService.update(employee);
         System.out.println(employee.toString());
         return new ModelAndView("redirect:EmployeePage");
     }
-     @RequestMapping("delete")
+
+    @RequestMapping("delete")
     public ModelAndView deleteEmployee(@RequestParam int id) throws ClassNotFoundException, SQLException {
-        employeeDao.delete(id);
+        employeeService.delete(id);
         return new ModelAndView("redirect:EmployeePage");
     }
 

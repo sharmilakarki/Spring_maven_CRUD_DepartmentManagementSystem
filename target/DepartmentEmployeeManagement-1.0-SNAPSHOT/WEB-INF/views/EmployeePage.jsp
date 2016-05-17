@@ -55,7 +55,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach var="employee" items="${employee}">
+<!--                    <c:forEach var="employee" items="${employee}">
                         <tr>
                             <td>${employee.id}</td>
                             <td>${employee.firstName}</td>
@@ -67,6 +67,27 @@
                             <td>${employee.effectiveDate}</td>
                             <td>${employee.modifiedDate}</td>
                             <td>${employee.status}</td>
+                            <td><a href="${URL}/edit?id=${employee.id}" class="btn btn-success"><span class="glyphicon glyphicon-edit"/></a>
+                                &nbsp;&nbsp;
+                                <a href="delete?id=${employee.id}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"/></a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                        -->
+                        
+                        <c:forEach var="employee" items="${model.employee}">
+                        <tr>
+                            <td>${employee.id}</td>
+                            <td>${employee.firstName}</td>
+                            <td>${employee.lastName}</td>
+                            <td>${employee.email}</td>
+                            <td>${employee.address}</td>
+                            <td>${employee.departmentId}</td>
+                            <td>${employee.joinedDate}</td>
+                            <td>${employee.effectiveDate}</td>
+                            <td>${employee.modifiedDate}</td>
+                            <td>${employee.status}</td>
+                           
                             <td><a href="${URL}/edit?id=${employee.id}" class="btn btn-success"><span class="glyphicon glyphicon-edit"/></a>
                                 &nbsp;&nbsp;
                                 <a href="delete?id=${employee.id}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"/></a>

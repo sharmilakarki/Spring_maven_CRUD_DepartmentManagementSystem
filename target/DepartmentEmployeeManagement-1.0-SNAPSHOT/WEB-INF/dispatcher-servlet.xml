@@ -19,28 +19,32 @@
     <mvc:annotation-driven/>
     <mvc:resources mapping="/static/**" location="/WEB-INF/assets/"/>
     
-    <bean id="JavaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+<!--    <bean id="JavaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="host" value="smtp.gmail.com"/>
         <property name="port" value="587"/>
         <property name="username" value="abcdgroupproject@gmail.com"/>
         <property name="password" value="departmentemployee"/>
         <property name="javaMailProperties">
             <props>
-                <prop key="mail.transport.protocol">smtp</prop>
                 <prop key="mail.smtp.auth">true</prop>
                 <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.smtp.ssl.trust">true</prop>
             </props>
-        </property>
+       </property>
+        
+    </bean> -->
+   
+    <bean id="email" class="com.abcd.employeemaven.helper.Email">
         
     </bean>
-   
-
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/WEB-INF/views/"
           p:suffix=".jsp" />
 
-   
+    <bean id="customMailMessage" class="org.springframework.mail.SimpleMailMessage">
+       
+    </bean>
    
 
 </beans>

@@ -15,16 +15,18 @@ import java.util.List;
  */
 public interface EmployeeDao {
 
-    int insert(Employee employee) throws ClassNotFoundException, SQLException;
+    int insert(Employee employee);
 
-    int update(Employee employee) throws ClassNotFoundException, SQLException;
+    int update(Employee employee) ;
 
-    int delete(int id) throws ClassNotFoundException, SQLException;
+    int delete(int id) ;
 
-    List<Employee> getAll() throws ClassNotFoundException, SQLException;
+    List<Employee> getAll() ;
 
-    Employee getById(int id) throws ClassNotFoundException, SQLException;
+    Employee getById(int id) ;
     
 
-    Employee searchByName(String name) throws ClassNotFoundException, SQLException;
+    Employee searchByName(String name) ;
+    
+    List<Employee> getByDepartmentId(int id);
 }

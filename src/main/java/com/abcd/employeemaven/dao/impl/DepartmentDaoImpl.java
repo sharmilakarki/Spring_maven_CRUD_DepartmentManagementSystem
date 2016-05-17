@@ -1,3 +1,6 @@
+
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -26,41 +29,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @Override
-    public int insert(Department department) throws ClassNotFoundException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int update(Department department) throws ClassNotFoundException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int delete(int id) throws ClassNotFoundException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Department> getAll() throws ClassNotFoundException, SQLException {
-        return jdbcTemplate.query(DepartmentSQL.GETALL, new RowMapper<Department>() {
-
-            @Override
-            public Department mapRow(ResultSet rs, int i) throws SQLException {
-                return mapData(rs);
-            }
-        });
-    }
-
-    @Override
-    public Department getById(int id) throws ClassNotFoundException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Department searchByName(String name) throws ClassNotFoundException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
 
     public Department mapData(ResultSet rs) throws SQLException {
 
@@ -75,4 +44,49 @@ public class DepartmentDaoImpl implements DepartmentDao {
         return department;
 
     }
+
+    @Override
+    public int insert(Department department) {
+        return jdbcTemplate.update(DepartmentSQL.INSERT, new Object[]{department.getDepartmentCode(),department.getDepartmentDescription(),department.getDepartmentName(),department.isStatus()});
+    }
+
+    @Override
+    public int update(Department department) {
+        return jdbcTemplate.update(DepartmentSQL.UPDATE, new Object[]{department.getDepartmentCode(),department.getDepartmentDescription(),department.getDepartmentName(),department.getId(),department.getModifiedDate(),department.isStatus(),department.getId()});
+    }
+
+    @Override
+    public int delete(int id) {
+       return jdbcTemplate.update(DepartmentSQL.DELETE, new Object[]{id});
+    }
+
+    @Override
+    public List<Department> getAll() {
+         return jdbcTemplate.query(DepartmentSQL.GETALL, new RowMapper<Department>() {
+            @Override
+            public Department mapRow(ResultSet rs, int i) throws SQLException {
+                return mapData(rs);
+            }
+        });
+    }
+
+    @Override
+    public Department getById(int id) {
+        return jdbcTemplate.queryForObject(DepartmentSQL.GETBYID, new Object[]{id}, new RowMapper<Department>() {
+
+            @Override
+            public Department mapRow(ResultSet rs, int i) throws SQLException {
+                return mapData(rs);
+            
+            }
+        });
+    }
+
+    @Override
+    public Department searchByName(String name) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
+   
 }

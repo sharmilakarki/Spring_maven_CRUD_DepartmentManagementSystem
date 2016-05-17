@@ -27,22 +27,35 @@ public class EmployeeDaoImpl implements EmployeeDao {
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public int insert(Employee employee) throws ClassNotFoundException, SQLException {
+    public int insert(Employee employee) {
        return jdbcTemplate.update(EmployeeSQL.EMPLOYEE_INSERT, new Object[]{employee.getFirstName(),employee.getLastName(),employee.getEmail(),employee.getAddress(),employee.getDepartmentId(),employee.getEffectiveDate(),employee.isStatus()});
     }
 
     @Override
-    public int update(Employee employee) throws ClassNotFoundException, SQLException {
+    public int update(Employee employee) {
       return jdbcTemplate.update(EmployeeSQL.UPDATE,new Object[]{employee.getFirstName(),employee.getLastName(),employee.getEmail(),employee.getAddress(),employee.getDepartmentId(),employee.getModifiedDate(),employee.isStatus(),employee.getId()});
     }
 
     @Override
-    public int delete(int id) throws ClassNotFoundException, SQLException {
+    public int delete(int id) {
       return jdbcTemplate.update(EmployeeSQL.DELETE, new Object[]{id});
     }
 
     @Override
-    public List<Employee> getAll() throws SQLException {
+    public List<Employee> getByDepartmentId(int id) {
+        return jdbcTemplate.query(EmployeeSQL.GETDEPAARTMENTID, new Object[]{id},new RowMapper<Employee>() {
+
+            @Override
+            public Employee mapRow(ResultSet rs, int i) throws SQLException {
+               return mapData(rs);
+            }
+        });
+    }
+    
+    
+
+    @Override
+    public List<Employee> getAll(){
         return jdbcTemplate.query(EmployeeSQL.GETALL, new RowMapper<Employee>() {
 
             @Override
@@ -53,7 +66,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public Employee getById(int id) throws ClassNotFoundException, SQLException {
+    public Employee getById(int id)  {
       return jdbcTemplate.queryForObject(EmployeeSQL.GETBYID, new Object[]{id}, new RowMapper<Employee>() {
 
             @Override
@@ -65,7 +78,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public Employee searchByName(String name) throws ClassNotFoundException, SQLException {
+    public Employee searchByName(String name) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

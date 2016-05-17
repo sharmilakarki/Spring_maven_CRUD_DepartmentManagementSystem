@@ -71,7 +71,7 @@
        <div class="container" id="mail" height="200px">
             <h1>Email Form</h1>
             <c:url var="sendMail" value="mail/send" />
-            <form method="POST" action="${sendMail}" class="form-group">
+            <form method="POST" action="${sendMail}" modelAttribute="email" class="form-group">
                 <table>
                     <tr>
                         <td>  <label path="email">Email to:</label></td>

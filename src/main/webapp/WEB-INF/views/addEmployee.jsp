@@ -39,7 +39,7 @@
              <label for="effectiveDate" class="sr-only">Effective date</label>
             <input type="text" name="effectiveDate" id="effectiveDate" class="form-control" placeholder="effective date"  required autofocus></br>
             
-            <input type="checkbox" name="status" value=""/></br>
+            <input type="checkbox" name="status" value="1"/></br>
             <button class="btn  btn-block btn-primary" type="submit">Register</button>
           
         </form>

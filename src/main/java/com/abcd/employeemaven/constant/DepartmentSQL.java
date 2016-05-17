@@ -10,13 +10,13 @@ package com.abcd.employeemaven.constant;
  * @author sharmila
  */
 public class DepartmentSQL {
-    public final static String Course_insert = "INSERT INTO " + TableConstant.TABLE_EMPLOYEE + "(department_id,department_code,department_name,department_description,added_date,modified_date,status)"
+    public final static String INSERT = "INSERT INTO " + TableConstant.TABLE_DEPARTMENT + "(department_id,department_code,department_name,department_description,status)"
             + "Values(?,?,?,?,?,?,?)";
-    public final static String GETALL = "select * from " + TableConstant.TABLE_EMPLOYEE;
-    public final static String GETBYID = "select * from " + TableConstant.TABLE_EMPLOYEE + " where id = ?";
-    public final static String UPDATE="Update table "+TableConstant.TABLE_EMPLOYEE +" SET department_code=?, department_name=?, department_description=?, added_date=?,modified_date=?,status=?"
+    public final static String GETALL = "select * from " + TableConstant.TABLE_DEPARTMENT;
+    public final static String GETBYID = "select * from " + TableConstant.TABLE_DEPARTMENT + " where id = ?";
+    public final static String UPDATE="Update table "+TableConstant.TABLE_DEPARTMENT +" SET department_code=?, department_name=?, department_description=?, added_date=?,modified_date=?,status=?"
             + "where id=?";
-    public final static String DELETE="Delete from "+TableConstant.TABLE_EMPLOYEE +" WHERE id =?";
-    public final static String GETBYNAME="select * from "+TableConstant.TABLE_EMPLOYEE +" Where department_name=?";
+    public final static String DELETE="Delete from "+TableConstant.TABLE_DEPARTMENT +" WHERE id =?";
+    public final static String GETBYNAME="select * from "+TableConstant.TABLE_DEPARTMENT +" Where department_name=?";
             
 }
