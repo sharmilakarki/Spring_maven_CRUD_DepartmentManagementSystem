@@ -19,10 +19,10 @@
     <mvc:annotation-driven/>
     <mvc:resources mapping="/static/**" location="/WEB-INF/assets/"/>
     
-<!--    <bean id="mailSender" class="org.springframework.mail.javaMail.JavaMailSenderImpl">
+    <bean id="JavaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="host" value="smtp.gmail.com"/>
         <property name="port" value="587"/>
-        <property name="username" value="springgroupproject@gmail.com"/>
+        <property name="username" value="abcdgroupproject@gmail.com"/>
         <property name="password" value="departmentemployee"/>
         <property name="javaMailProperties">
             <props>
@@ -32,7 +32,7 @@
             </props>
         </property>
         
-    </bean>-->
+    </bean>
    
 
     <bean id="viewResolver"

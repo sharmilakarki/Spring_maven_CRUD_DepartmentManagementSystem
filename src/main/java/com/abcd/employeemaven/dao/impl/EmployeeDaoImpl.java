@@ -33,7 +33,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public int update(Employee employee) throws ClassNotFoundException, SQLException {
-      return jdbcTemplate.update(EmployeeSQL.UPDATE,new Object[]{ new Object[]{employee.getFirstName(),employee.getLastName(),employee.getEmail(),employee.getAddress(),employee.getDepartmentId(),employee.getEffectiveDate(),employee.getModifiedDate(),employee.isStatus()}});
+      return jdbcTemplate.update(EmployeeSQL.UPDATE,new Object[]{employee.getFirstName(),employee.getLastName(),employee.getEmail(),employee.getAddress(),employee.getDepartmentId(),employee.getModifiedDate(),employee.isStatus(),employee.getId()});
     }
 
     @Override

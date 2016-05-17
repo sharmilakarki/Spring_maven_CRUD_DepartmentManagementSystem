@@ -14,8 +14,8 @@ public class EmployeeSQL {
             + "Values(?,?,?,?,?,?,?)";
     public final static String GETALL = "select * from " + TableConstant.TABLE_EMPLOYEE;
     public final static String GETBYID = "select * from " + TableConstant.TABLE_EMPLOYEE + " where employee_id = ?";
-    public final static String UPDATE="Update table "+TableConstant.TABLE_EMPLOYEE +" SET employee_first_name=?,employee_first_name=?,email=?,address=?,department_id=?,modified_date=?,status=?)"
-            + "where id=?";
+    public final static String UPDATE="Update "+TableConstant.TABLE_EMPLOYEE +" SET employee_first_name=?,employee_last_name=?,email=?,address=?,department_id=?,modified_date=?,status=? "
+            + " where employee_id=?";
     public final static String DELETE="Delete from "+TableConstant.TABLE_EMPLOYEE +" WHERE employee_id =?";
     public final static String GETBYNAME="select * from "+TableConstant.TABLE_EMPLOYEE +" Where employee_first_name=?";
     public final static String GETDEPAARTMENTID="select department_id from "+TableConstant.TABLE_EMPLOYEE ;

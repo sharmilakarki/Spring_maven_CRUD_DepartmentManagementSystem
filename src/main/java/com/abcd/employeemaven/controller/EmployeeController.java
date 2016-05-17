@@ -25,7 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author sharmila
  */
 @Controller
-@RequestMapping(value = {"/"})
+@RequestMapping(value = "/")
 public class EmployeeController {
 
     @Autowired
@@ -34,7 +34,7 @@ public class EmployeeController {
 //    @Autowired
 //    private JavaMailSender javaMailSender;
    
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping( method = RequestMethod.GET)
     public String index() {
         return "index";
     }
@@ -51,22 +51,6 @@ public class EmployeeController {
 
     }
 
-    @RequestMapping(value = "")
-    public String doSendEmail(HttpServletRequest request){
-        String recipientAddress=request.getParameter("email");
-        String subject=request.getParameter("subject");
-        String message=request.getParameter("message");
-        
-        //console
-        System.out.println("To: " + recipientAddress);
-        System.out.println("Subject: " + subject);
-        System.out.println("Message: " + message);
-        
-        //simple email object
-        //SimpleMailMessage 
-        return "mailSend";
-    
-}
     @RequestMapping("saveEmployee")
     public ModelAndView registerUser(@ModelAttribute("employee") Employee employee) throws ClassNotFoundException, SQLException {
         employeeDao.insert(employee);
@@ -90,9 +74,9 @@ public class EmployeeController {
         employee = employeeDao.getById(id);
         return new ModelAndView("editEmployee", "employee", employee);
     }
-    @RequestMapping("/updateEmployee")
-    public ModelAndView saveEditedEmployee(@RequestParam int id, @ModelAttribute Employee employee ,BindingResult result) throws ClassNotFoundException, SQLException {
-         employeeDao.update(employee);
+    @RequestMapping("/updateEmployee?id=${id}")
+    public ModelAndView saveEditedEmployee(@RequestParam int id, @ModelAttribute("employee") Employee employee ,BindingResult result) throws ClassNotFoundException, SQLException {
+        employeeDao.update(employee);
         return new ModelAndView("redirect:EmployeePage");
     }
      @RequestMapping("delete")

@@ -11,50 +11,50 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Edit Employee Page</title>
+        <link rel="stylesheet" href="${URL}/static/css/myForm.css"/>
     </head>
     <body>
-<!--
-        <div class="container">
+
+        <div class="container"><!--
             <h1>Edit Employee</h1>
-            <c:url var="employeeEdit" value="updateEmployee" />
-            <form id="updateCourse" modelAttribute="employee" method="POST" action="${employeeEdit}">
+            <c:url var="employeeEdit" value="updateEmployee?id=${employee.id}" />
+            -->            <form id="updateCourse" modelAttribute="employee" method="POST" class="form-group" action="${employeeEdit}">
                 <table width="400px" height="150px" class="table table-bordered">  
                     <tr>  
                         <td><label path="firstName">First Name</label></td>  
-                    <td><input path="firstName" value="${employee.firstName}" /></td>  
+                        <td><input path="firstName" value="${employee.firstName}" /></td>  
                     </tr>  
                     <tr>  
                         <td><label path="lastName">Last Name </label></td>  
-                    <td><input path="lastName" value="${employee.lastName}"/></td>  
+                        <td><input path="lastName" value="${employee.lastName}"/></td>  
                     </tr> 
                     <tr>  
                         <td><label path="email">Email</label></td>  
-                    <td><input path="email" value="${employee.email}"/></td> 
+                        <td><input path="email" value="${employee.email}"/></td> 
                     </tr> 
                     <tr>  
                         <td><label path="address">Address </label></td>  
-                    <td><input path="address" value="${employee.address}"/></td>  
+                        <td><input path="address" value="${employee.address}"/></td>  
                     </tr> 
-                                        <tr>  
-                                            <td><label path="departmentId">Department Id</label></td>  
-                                        <td><input path="departmentId" value="${employee.departmentId}"/></td>  
-                    <td><label path="checkbox">Notify changes in  Mail</label>
-                    <td><input type="checkbox" path=""id="sendMail" /></td>
-                                        </tr>  
+                    <tr>  
+                        <td><label path="departmentId">Department Id</label></td>  
+                        <td><input path="departmentId" value="${employee.departmentId}"/></td>  
+
+                    </tr>  
 
                     <tr>  
                         <td><label path="modifiedDate"> Modified Date</label></td>  
-                    <td><input path="modifiedDate" value="${employee.modifiedDate}"/></td>  
+                        <td><input path="modifiedDate" value="${employee.modifiedDate}"/></td>  
                     </tr> 
                     <tr>  
-                        <td><label path="status"> Added Date</label></td>  
-                    <td><input path="status" value="${employee.status}"/></td>  
+                        <td><label path="status"> Status</label></td>  
+                        <td><input path="status" value="${employee.status}"/></td>  
                     </tr> 
                     <tr>
                         <td>
-                    <label path="checkbox">Notify department change in email</label>
-                    <input path="checkbox"type="checkbox"/>
-                    </td>
+                            <label path="checkbox">Notify department change in email</label>
+                            <input path="checkbox"type="checkbox" id="MailSendCheckbox"/>
+                        </td>
                     </tr>
                     <tr>  
                         <td></td>  
@@ -64,27 +64,41 @@
                 </table>  
             </form>  
         </div>
-
-
-        <div class="container" id="mail">
+        
+       <div class="container" id="mail" height="200px">
             <h1>Email Form</h1>
-            <form>
-                <label path="email">Email to:</label>
-                <input path="email" name="email" value="${employee.email}"/></br>
-                <label path="subject">Subject</label>
-                <input path="subject" name="subject"/></br>
-                <label path="message">Message</label>
-                <input path="message" name="message"/></br>
-                <button type="submit" id="sendEmailBtn"><span class="glyphicon glyphicon-send"</button>
+            <form method="POST" action="/mail/send" class="form-group">
+                <table>
+                    <tr>
+                        <td>  <label path="email">Email to:</label></td>
+                        <td>   <input path="email" name="email" value="${employee.email}"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label path="subject">Subject</label></td>
+                        <td>  <input path="subject" name="subject" value="Department changed"/></td>
 
+                    </tr>
+                    <tr>
+                        <td>
+                            <label path="message">Message</label></td>
+                        <td> <input path="message" name="message" value="Your department has been changed to ${employee.departmentId}"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="submit"  id="sendEmailBtn"><span class="glyphicon glyphicon-send"</button>
+                        </td>
+                    <tr>
+                </table>
             </form>
 
-        </div>-->
+        </div>
         <script>
-            $(document).("ready",function(){
-                alert("works");
+            $("#MailSendCheckbox").change(function(){
+                $("#mail").toggle();
             });
 
         </script>
+        
     </body>
 </html>
