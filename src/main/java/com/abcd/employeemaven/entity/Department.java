@@ -6,6 +6,9 @@
 package com.abcd.employeemaven.entity;
 
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -21,6 +24,8 @@ public class Department {
     private Date modifiedDate;
     private boolean status;
 
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "department")
+    private List<Employee> employeeList;
     public Department() {
     }
 
@@ -87,5 +92,15 @@ public class Department {
     public void setStatus(boolean status) {
         this.status = status;
     }
+
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
+    public void setEmployeeList(List<Employee> employeeList) {
+        this.employeeList = employeeList;
+    }
+    
+    
 
 }

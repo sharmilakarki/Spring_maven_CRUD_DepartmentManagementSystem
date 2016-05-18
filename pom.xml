@@ -73,6 +73,13 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>-->
+        <!-- http://mvnrepository.com/artifact/javax.interceptor/javax.interceptor-api -->
+        <dependency>
+            <groupId>javax.interceptor</groupId>
+            <artifactId>javax.interceptor-api</artifactId>
+            <version>1.2-b06</version>
+        </dependency>
+
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>

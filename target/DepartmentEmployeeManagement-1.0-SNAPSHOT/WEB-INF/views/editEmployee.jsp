@@ -16,7 +16,7 @@
     <body>
 
         <div class="container">
-            <h1>Edit Employee</h1>
+            <h1>Edit Employee Information</h1>
             <c:url var="employeeEdit" value="updateEmployee" />
                      <form id="updateCourse" modelAttribute="employee" method="POST" class="form-group" action="${employeeEdit}">
                 <table width="400px" height="150px" class="table table-bordered table-striped">  
@@ -39,19 +39,14 @@
                     <tr>  
                         <td><label path="departmentId">Department Id</label></td>  
                         <td><input path="departmentId" value="${employee.departmentId}"/></td>  
-
                     </tr>  
 
-                    <tr>  
-                        <td><label path="modifiedDate"> Modified Date</label></td>  
-                        <td><input path="modifiedDate" value="${employee.modifiedDate}"/></td>  
-                    </tr> 
                     <tr>  
                         <td><label path="status"> Status</label></td>  
                         <td><input path="status" value="${employee.status}"/></td>  
                     </tr> 
                     <tr>
-                    <input type="hidden" value="${employee.id}"/>
+                    <input type="hidden" name="id" value="${employee.id}"/>
                     </tr>
                     <tr>
                         <td>
@@ -98,6 +93,9 @@
 
         </div>
         <script>
+            $(document).ready(function (){
+                $("#mail").hide();
+            });
             $("#MailSendCheckbox").change(function(){
                 $("#mail").toggle();
             });

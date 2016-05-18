@@ -62,7 +62,7 @@
                             <td>${employee.lastName}</td>
                             <td>${employee.email}</td>
                             <td>${employee.address}</td>
-                            <td>${employee.departmentId}</td>
+                            <td>${employee.department.departmentId}</td>
                             <td>${employee.joinedDate}</td>
                             <td>${employee.effectiveDate}</td>
                             <td>${employee.modifiedDate}</td>

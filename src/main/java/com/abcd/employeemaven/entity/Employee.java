@@ -6,6 +6,8 @@
 package com.abcd.employeemaven.entity;
 
 import java.util.Date;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -19,6 +21,10 @@ public class Employee {
     private Date joinedDate;
     private Date effectiveDate;
     private Date modifiedDate;
+    
+    @JoinColumn(name="department_id",referencedColumnName = "id")
+    @ManyToOne
+    private Department department;
     
 
     public Employee() {
@@ -117,6 +123,14 @@ public class Employee {
     @Override
     public String toString() {
         return "Employee{" + "id=" + id + ", departmentId=" + departmentId + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", address=" + address + ", status=" + status + ", joinedDate=" + joinedDate + ", effectiveDate=" + effectiveDate + ", modifiedDate=" + modifiedDate + '}';
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
     
 }
