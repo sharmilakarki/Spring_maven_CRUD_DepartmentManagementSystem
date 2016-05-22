@@ -5,14 +5,18 @@
  */
 package com.abcd.employeemaven.controller;
 
+import com.abcd.employeemaven.constant.EmployeeSQL;
 import com.abcd.employeemaven.entity.Department;
 import com.abcd.employeemaven.entity.Employee;
 import com.abcd.employeemaven.service.DepartmentService;
 import com.abcd.employeemaven.service.EmployeeService;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,9 +75,26 @@ public class EmployeeController {
 
     }
 
-    @RequestMapping("/saveEmployee")
+//    @RequestMapping("/saveEmployee")
+//    public ModelAndView registerUser(@ModelAttribute("employee") Employee employee, BindingResult result) throws ClassNotFoundException, SQLException {
+//        employeeService.insert(employee);
+//        System.out.println(employee.toString());
+//        return new ModelAndView("redirect:EmployeePage");
+//    }
+    
+     @RequestMapping("/saveEmployee")
     public ModelAndView registerUser(@ModelAttribute("employee") Employee employee, BindingResult result) throws ClassNotFoundException, SQLException {
+        if(employee.getId()==0){
         employeeService.insert(employee);
+        }
+        else{
+            Calendar calendar = Calendar.getInstance();
+            Date date = calendar.getTime();
+            Timestamp timestamp = new Timestamp(date.getTime());
+            employee.setModifiedDate(timestamp);
+            employeeService.update(employee);
+        }
+        
         System.out.println(employee.toString());
         return new ModelAndView("redirect:EmployeePage");
     }
@@ -97,29 +118,13 @@ public class EmployeeController {
         String empId = (request.getParameter("id"));
         Employee e = employeeService.getById(Integer.parseInt(empId));
         if (e != null) {
-            mv=new ModelAndView("editEmployee");
-            mv.addObject("employee",employeeService.getById(id));
+            mv = new ModelAndView("editEmployee");
+            mv.addObject("employee", employeeService.getById(id));
         }
         return mv;
     }
 
-    @RequestMapping("/updateEmployee")
-    public ModelAndView saveEditedEmployee(@ModelAttribute("employee") Employee employee, BindingResult result, HttpServletRequest request) throws ClassNotFoundException, SQLException {
-        String id = (request.getParameter("id"));
 
-        System.out.println("The id " + id);
-//        Employee e = employeeService.getById(Integer.parseInt(id));
-//        if (e != null) {
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-
-            employee.setModifiedDate(dateFormat.getCalendar().getTime());
-            System.out.println(employee.toString());
-            employeeService.update(employee);
-
-//        }
-
-        return new ModelAndView("redirect:EmployeePage");
-    }
 
     @RequestMapping("delete")
     public ModelAndView deleteEmployee(@RequestParam int id) throws ClassNotFoundException, SQLException {
